@@ -1,0 +1,27 @@
+﻿@model LoginModel
+@{
+    Layout = null;
+}
+<html>
+    <head>
+        <title>Login</title>
+    </head>
+    <body>
+        <h1>Please Login To Continue</h1>
+
+        <form asp-controller="Account" asp-action="Login" method="post">
+            <label asp-for="Email">Email:</label>
+            <br />
+            <input asp-for="Email"/><br /><br />
+                       
+            
+            <label asp-for="Password">Password:</label>
+            <br />
+            <input asp-for="Password"/><br /><br />
+
+            <input type="submit" value="Login" />
+
+
+        </form>
+    </body>
+</html>

@@ -1,0 +1,47 @@
+﻿@model TrafficAdd
+
+<form method="post">
+    <div class="border p-3 mt-4">
+        <div class="row pb-2">
+            <h2 class="text-primary"> Create Traffic</h2>
+        <hr />
+        </div>
+        <div asp-validation-summary="All"></div>
+        <div class="mb-3">
+            <label asp-for="Name"></label>
+            <input asp-for="Name" class="form-control" /> 
+            <span asp-validation-for="Name" class="text-danger"></span> <!-- for name validation bcoz cant be empty-->
+        </div>        
+        
+        <div class="mb-3">
+            <label asp-for="OfficerId"></label>
+            <input asp-for="OfficerId" class="form-control" /> 
+            <span asp-validation-for="OfficerId" class="text-danger"></span> <!-- for name validation bcoz cant be empty-->
+        </div>
+
+            <div class="mb-3">
+            <label asp-for="Post"></label>
+            <input asp-for="Post" class="form-control" />
+            <span asp-validation-for="Post" class="text-danger"></span>
+            </div>
+
+
+            <div class="mb-3">
+            <label asp-for="Address"></label>
+            <input asp-for="Address" class="form-control" />
+            <span asp-validation-for="Address" class="text-danger"></span>
+            </div>
+            <button type="submit" class="btn btn-primary" style="width:150px">Create</button>
+            <a asp-controller="Traffic" asp-action="Index" class="btn btn-secondary" style="width:150px">
+                Back to the List
+            </a>
+
+
+    </div>
+</form>
+
+@section Scripts{
+@{
+<partial name = "_ValidationScriptsPartial"></partial>
+}
+}

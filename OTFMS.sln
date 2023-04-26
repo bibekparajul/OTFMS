@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.2.32630.192
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OnlineTrafficWeb", "OnlineTrafficWeb\OnlineTrafficWeb.csproj", "{C554E554-0974-479E-A65C-78F41F59FCD7}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{C554E554-0974-479E-A65C-78F41F59FCD7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C554E554-0974-479E-A65C-78F41F59FCD7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C554E554-0974-479E-A65C-78F41F59FCD7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C554E554-0974-479E-A65C-78F41F59FCD7}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {2B5465EE-C594-49AD-8738-DD3946E4F68B}
+	EndGlobalSection
+EndGlobal
