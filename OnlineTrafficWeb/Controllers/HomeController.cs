@@ -15,6 +15,7 @@ namespace OnlineTrafficWeb.Controllers
         private readonly ILogger<HomeController> _logger;
         private readonly IUnitOfWork _unitOfWork;
 
+
         public HomeController(ILogger<HomeController> logger, IUnitOfWork unitOfWork)
         {
             _logger = logger;
@@ -43,8 +44,12 @@ namespace OnlineTrafficWeb.Controllers
             return View(fineFromDb);
         }
 
+
         public IActionResult Pay()
         {
+
+
+
             var domain = "https://localhost:7185/";
             var options = new SessionCreateOptions
             {
@@ -55,73 +60,73 @@ namespace OnlineTrafficWeb.Controllers
                 LineItems = new List<SessionLineItemOptions>(),
 
                 Mode = "payment",
-                //SuccessUrl = domain + $"customer/cart/OrderConfirmation?id={ShoppingCartVM.OrderHeader.Id}",
-                //CancelUrl = domain + $"customer/cart/index",
+                SuccessUrl = domain + $"Home/success",
+                CancelUrl = domain + $"Home/cancel",
             };
 
-            //foreach (var item in FineModel)
-            //{
-            //    var sessionLineItem = new SessionLineItemOptions
-            //    {
-            //        PriceData = new SessionLineItemPriceDataOptions
-            //        {
-            //            UnitAmount = (long)(item.Price * 100),
-            //            Currency = "usd",
-            //            ProductData = new SessionLineItemPriceDataProductDataOptions
-            //            {
-            //                Name = item.Product.Title,
-            //            },
-            //        },
-            //        Quantity = item.Count,
-            //    };
-            //    options.LineItems.Add(sessionLineItem);
 
-            //}
+                var sessionLineItem = new SessionLineItemOptions
+                {
+                    PriceData = new SessionLineItemPriceDataOptions
+                    {
+                        UnitAmount = (long)(100),
+                        Currency = "usd",
+                        ProductData = new SessionLineItemPriceDataProductDataOptions
+                        {
+                            Name = "Fine",
+                        },
+                    },
+                    Quantity = 1,
+                };
+                options.LineItems.Add(sessionLineItem);
+
+          //  }
 
             var service = new SessionService();
             Session session = service.Create(options);
-            //_unitOfWork.OrderHeader.UpdateStripePaymentID(ShoppingCartVM.OrderHeader.Id, session.Id, session.PaymentIntentId);
             _unitOfWork.Save();
 
             Response.Headers.Add("Location", session.Url);
             return new StatusCodeResult(303);
 
-            //stripe setting ends here
 
-            //_unitOfWork.ShoppingCart.RemoveRange(ShoppingCartVM.ListCart);
-            //_unitOfWork.Save();
-            // return RedirectToAction("Index", "Home");
+        } 
+
+        public IActionResult Success()
+        {
+            return View();
         }
 
 
 
 
 
-        //[HttpPost]
-        //[ValidateAntiForgeryToken]
-        ////[/*Authorize*/]
-        //public IActionResult Details(FineModel finepay)
-        //{
-        //    //this claim helps to find out whether user is login or not
-        //    var claimsIdentity = (ClaimsIdentity)User.Identity;
-        //    var claim = claimsIdentity.FindFirst(ClaimTypes.NameIdentifier);
-        //    finepay.ApplicationUserId = claim.Value;
 
-        //    ShoppingCart cartFromDB = _unitOfWork.ShoppingCart.GetFirstorDefault(
-        //      u => u.ApplicationUserId == claim.Value && u.ProductId == shoppingCart.ProductId);
+//[HttpPost]
+//[ValidateAntiForgeryToken]
+////[/*Authorize*/]
+//public IActionResult Details(FineModel finepay)
+//{
+//    //this claim helps to find out whether user is login or not
+//    var claimsIdentity = (ClaimsIdentity)User.Identity;
+//    var claim = claimsIdentity.FindFirst(ClaimTypes.NameIdentifier);
+//    finepay.ApplicationUserId = claim.Value;
 
-   
-
-        //    _unitOfWork.Save();
-
-        //    return RedirectToAction(nameof(Index));
-        //}
+//    ShoppingCart cartFromDB = _unitOfWork.ShoppingCart.GetFirstorDefault(
+//      u => u.ApplicationUserId == claim.Value && u.ProductId == shoppingCart.ProductId);
 
 
 
+//    _unitOfWork.Save();
+
+//    return RedirectToAction(nameof(Index));
+//}
 
 
-        public IActionResult Privacy()
+
+
+
+public IActionResult Privacy()
         {
             return View();
         }
@@ -132,6 +137,5 @@ namespace OnlineTrafficWeb.Controllers
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
         }
     }
-
 
 }

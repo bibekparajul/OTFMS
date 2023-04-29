@@ -12,8 +12,8 @@ using OnlineTrafficWeb.Data;
 namespace OnlineTrafficWeb.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20230429062217_addPaymentHeaderToDb")]
-    partial class addPaymentHeaderToDb
+    [Migration("20230429072303_addPayHeader")]
+    partial class addPayHeader
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -332,17 +332,11 @@ namespace OnlineTrafficWeb.Migrations
                     b.Property<string>("SessionId")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("UserModelId")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(450)");
-
                     b.Property<string>("VehicleNumber")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("UserModelId");
 
                     b.ToTable("PaymentHeaders");
                 });
@@ -374,40 +368,6 @@ namespace OnlineTrafficWeb.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("TrafficAds");
-                });
-
-            modelBuilder.Entity("OnlineTrafficWeb.Models.UserModel", b =>
-                {
-                    b.Property<string>("Id")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<string>("ConfirmPassword")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Email")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Password")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Phone")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Role")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("UserName")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("UserModel");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
@@ -470,17 +430,6 @@ namespace OnlineTrafficWeb.Migrations
                         .IsRequired();
 
                     b.Navigation("DriversAdd");
-                });
-
-            modelBuilder.Entity("OnlineTrafficWeb.Models.PaymentHeader", b =>
-                {
-                    b.HasOne("OnlineTrafficWeb.Models.UserModel", "UserModel")
-                        .WithMany()
-                        .HasForeignKey("UserModelId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("UserModel");
                 });
 #pragma warning restore 612, 618
         }

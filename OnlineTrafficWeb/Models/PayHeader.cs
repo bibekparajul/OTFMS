@@ -4,15 +4,15 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace OnlineTrafficWeb.Models
 {
-    public class PaymentHeader
+    public class PayHeader
     {
         public int Id { get; set; }
 
-        public string UserModelId { get; set; }
-        [ForeignKey("UserModelId")]
-        [ValidateNever]
+        //public string UserModelId { get; set; }
+        //[ForeignKey("UserModelId")]
+        //[ValidateNever]
 
-        public UserModel UserModel { get; set; }
+        //public UserModel UserModel { get; set; }
 
  
         public double FineTotal { get; set; }

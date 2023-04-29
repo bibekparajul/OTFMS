@@ -11,5 +11,8 @@ namespace OnlineTrafficWeb.Models.ViewModel
         public IEnumerable<SelectListItem> DriverList { get; set; }
         //[ValidateNever]
         //public IEnumerable<SelectListItem> TrafficList { get; set; }
+        public IEnumerable<FineModel> FineList { get; set; }
+        public FineHeader FineHeader { get; set; }
+
     }
 }

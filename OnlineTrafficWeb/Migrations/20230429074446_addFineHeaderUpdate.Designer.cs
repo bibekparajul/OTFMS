@@ -12,8 +12,8 @@ using OnlineTrafficWeb.Data;
 namespace OnlineTrafficWeb.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20230429065540_paymentheader")]
-    partial class paymentheader
+    [Migration("20230429074446_addFineHeaderUpdate")]
+    partial class addFineHeaderUpdate
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -253,6 +253,56 @@ namespace OnlineTrafficWeb.Migrations
                     b.ToTable("DriversAds");
                 });
 
+            modelBuilder.Entity("OnlineTrafficWeb.Models.FineHeader", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+
+                    b.Property<string>("Address")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("FineStatus")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<double>("FineTotal")
+                        .HasColumnType("float");
+
+                    b.Property<string>("LicenseNumber")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("PaymentDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime>("PaymentDueDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("PaymentIntentId")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("PaymentStatus")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("SessionId")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("VehicleNumber")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("FineHeaders");
+                });
+
             modelBuilder.Entity("OnlineTrafficWeb.Models.FineModel", b =>
                 {
                     b.Property<int>("Id")
@@ -290,7 +340,7 @@ namespace OnlineTrafficWeb.Migrations
                     b.ToTable("FineModels");
                 });
 
-            modelBuilder.Entity("OnlineTrafficWeb.Models.PaymentHeader", b =>
+            modelBuilder.Entity("OnlineTrafficWeb.Models.PayHeader", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -332,19 +382,13 @@ namespace OnlineTrafficWeb.Migrations
                     b.Property<string>("SessionId")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("UserModelId")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(450)");
-
                     b.Property<string>("VehicleNumber")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("UserModelId");
-
-                    b.ToTable("PaymentHeaders");
+                    b.ToTable("PayHeaders");
                 });
 
             modelBuilder.Entity("OnlineTrafficWeb.Models.TrafficAdd", b =>
@@ -374,40 +418,6 @@ namespace OnlineTrafficWeb.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("TrafficAds");
-                });
-
-            modelBuilder.Entity("OnlineTrafficWeb.Models.UserModel", b =>
-                {
-                    b.Property<string>("Id")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<string>("ConfirmPassword")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Email")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Password")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Phone")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Role")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("UserName")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("UserModel");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
@@ -470,17 +480,6 @@ namespace OnlineTrafficWeb.Migrations
                         .IsRequired();
 
                     b.Navigation("DriversAdd");
-                });
-
-            modelBuilder.Entity("OnlineTrafficWeb.Models.PaymentHeader", b =>
-                {
-                    b.HasOne("OnlineTrafficWeb.Models.UserModel", "UserModel")
-                        .WithMany()
-                        .HasForeignKey("UserModelId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("UserModel");
                 });
 #pragma warning restore 612, 618
         }
