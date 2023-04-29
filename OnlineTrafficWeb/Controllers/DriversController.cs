@@ -10,6 +10,9 @@ namespace OnlineTrafficWeb.Controllers
     public class DriversController : Controller
     {
 
+
+        //crud simple 
+
         //    private readonly ApplicationDbContext _db;
 
         //    public DriversController(ApplicationDbContext db)
@@ -123,6 +126,8 @@ namespace OnlineTrafficWeb.Controllers
         //}
 
 
+        //crud simple over
+
 
         private readonly IUnitOfWork _unitOfWork; //
 
@@ -131,7 +136,7 @@ namespace OnlineTrafficWeb.Controllers
             _unitOfWork = unitOfWork;
         }
         //the below is used to retrieve and display the data from database and show it to page 
-        //configured in Index.cshtml of category
+        //configured in Index.cshtml 
         public IActionResult Index()
         {
             IEnumerable<DriversAdd> objDriverList = _unitOfWork.DriversAdd.GetAll(); //   
@@ -174,11 +179,9 @@ namespace OnlineTrafficWeb.Controllers
             {
                 return NotFound();
             }
-            //var categoryFromDb = _db.Categories.Find(id);
 
             //find incase of priimary key only if not below sabai bujhxa!!!
             var driverFromDbFirst = _unitOfWork.DriversAdd.GetFirstorDefault(u => u.Id == id);    //
-            //var categoryFromDbSingle = _db.Categories.SingleOrDefault(u => u.Id == id);
             if (driverFromDbFirst == null)
             {
                 return NotFound();

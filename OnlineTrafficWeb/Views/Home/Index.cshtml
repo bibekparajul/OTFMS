@@ -1,8 +1,36 @@
-﻿@{
-    ViewData["Title"] = "Home Page";
-}
+﻿@model IEnumerable<FineModel>
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+<div class = "row pb-3">
+    @foreach (var fineee in Model)
+    {
+        <div class="col-lg-3 col-md-6">
+            <div class="row p-2">
+                <div class="col-12 p-1" style="border:1px solid green; border-radius: 5px;">
+                    <div class="card">
+                        <img src="https://imgs.search.brave.com/GdhwTmSiI4DUYGbBjgOkkmRbUFtQHLAnJBe1_xUwgj4/rs:fit:632:225:1/g:ce/aHR0cHM6Ly90c2Ux/Lm1tLmJpbmcubmV0/L3RoP2lkPU9JUC5H/cjdoY2pUY3FmNnZu/UUJrdjBrZmJnSGFG/aiZwaWQ9QXBp" class="card-img-top rounded" height="300px" width="250px"/>
+                        <div class=" card-body">
+                            <div class="pl-1">
+                                <p class="card-title h5 text-primary"><b>@fineee.DriversAdd.Name</b></p>
+                                <p class="card-title text-info text-primary">@fineee.DriversAdd.Name</p>
+
+                            </div>
+                            <div class="pl-1">
+                                <p>Fine Amount:<b>@fineee.DriverId.ToString("0.00")</b></p>
+                            </div>        
+ @*                           <div class="pl-1">
+                                <p>Discount offer: <b>$@fineee.Price100.ToString("0.00")</b></p>
+                            </div>
+*@
+                        </div>
+
+                    </div>
+                    <div >
+                        <a asp-action="Details" class="btn btn-primary form-control" asp-route-productId = "@fineee.Id">
+                        Details
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
 </div>
