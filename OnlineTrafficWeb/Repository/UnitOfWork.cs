@@ -13,6 +13,7 @@ namespace OnlineTrafficWeb.Repository
             DriversAdd = new DriversAddRepository(_db);
             TrafficAdd = new TrafficAddRepository(_db);
             FineAdd = new FineRepository(_db);
+           
         
 
         }

@@ -5,8 +5,7 @@ using System.Collections.Generic;
 
 namespace OnlineTrafficWeb.Controllers
 {
-
-
+  
     public class TrafficController : Controller
     {
         private readonly ApplicationDbContext _db;

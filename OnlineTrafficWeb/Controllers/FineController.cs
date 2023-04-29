@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using OnlineTrafficWeb.Models;
 using OnlineTrafficWeb.Models.ViewModel;
@@ -6,6 +7,8 @@ using OnlineTrafficWeb.Repository.IRepository;
 
 namespace OnlineTrafficWeb.Controllers
 {
+    //[Authorize(Roles="Traffic")]
+
     public class FineController : Controller
     {
 

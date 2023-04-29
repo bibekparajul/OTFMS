@@ -14,5 +14,12 @@ namespace OnlineTrafficWeb.Data
         public DbSet<TrafficAdd> TrafficAds { get; set; }
         public DbSet<DriversAdd> DriversAds { get; set; }
         public DbSet<FineModel> FineModels { get; set; }
+
+        public DbSet<PaymentHeader> PaymentHeaders { get; set; }
+
+        //public DbSet<UserModel> UserModels { get; set; }
+        //public DbSet<FinePay> FinePays { get; set; }
+
+
     }
 }

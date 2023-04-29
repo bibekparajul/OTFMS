@@ -22,11 +22,7 @@ namespace OnlineTrafficWeb.Models
         [ForeignKey("DriverId")]
         [ValidateNever]
 
-        public DriversAdd DriversAdd { get; set; }   
+        public DriversAdd DriversAdd { get; set; }     
         
-
-
-
-    
     }
 }

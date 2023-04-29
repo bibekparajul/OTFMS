@@ -4,7 +4,7 @@
 
 namespace OnlineTrafficWeb.Migrations
 {
-    public partial class changeFineModel4 : Migration
+    public partial class paymentheader : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {

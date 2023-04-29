@@ -1,7 +1,11 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using OnlineTrafficWeb.Models;
+using OnlineTrafficWeb.Models.ViewModel;
 using OnlineTrafficWeb.Repository.IRepository;
+using Stripe.Checkout;
 using System.Diagnostics;
+using System.Security.Claims;
 
 namespace OnlineTrafficWeb.Controllers
 {
@@ -24,42 +28,89 @@ namespace OnlineTrafficWeb.Controllers
             return View(fineList);
         }
 
-        //public IActionResult Details(int productId)
-        //{
+        //[Authorize]
 
-        //    ShoppingCart cartObj = new()
-        //    {
-        //        Count = 1,
-        //        ProductId = productId,
-        //        Product = _unitOfWork.Product.GetFirstorDefault(u => u.Id == productId, includeProperties: "Category,CoverType")
+        public IActionResult Details(int fineId)
+        {
+            //FineModel fineobj = new()
+            //{
+            //    FineId = fineId,
+            //    //DriversAdd = _unitOfWork.DriversAdd.GetFirstorDefault(u => u.Id == fineId)
+            //};
 
-        //    };
-        //    return View(cartObj);
-        //}
+            var fineFromDb = _unitOfWork.FineAdd.GetFirstorDefault(u => u.Id == fineId, includeProperties: "DriversAdd");
+
+            return View(fineFromDb);
+        }
+
+        public IActionResult Pay()
+        {
+            var domain = "https://localhost:7185/";
+            var options = new SessionCreateOptions
+            {
+                PaymentMethodTypes = new List<string>
+                {
+                    "card",
+                },
+                LineItems = new List<SessionLineItemOptions>(),
+
+                Mode = "payment",
+                //SuccessUrl = domain + $"customer/cart/OrderConfirmation?id={ShoppingCartVM.OrderHeader.Id}",
+                //CancelUrl = domain + $"customer/cart/index",
+            };
+
+            //foreach (var item in FineModel)
+            //{
+            //    var sessionLineItem = new SessionLineItemOptions
+            //    {
+            //        PriceData = new SessionLineItemPriceDataOptions
+            //        {
+            //            UnitAmount = (long)(item.Price * 100),
+            //            Currency = "usd",
+            //            ProductData = new SessionLineItemPriceDataProductDataOptions
+            //            {
+            //                Name = item.Product.Title,
+            //            },
+            //        },
+            //        Quantity = item.Count,
+            //    };
+            //    options.LineItems.Add(sessionLineItem);
+
+            //}
+
+            var service = new SessionService();
+            Session session = service.Create(options);
+            //_unitOfWork.OrderHeader.UpdateStripePaymentID(ShoppingCartVM.OrderHeader.Id, session.Id, session.PaymentIntentId);
+            _unitOfWork.Save();
+
+            Response.Headers.Add("Location", session.Url);
+            return new StatusCodeResult(303);
+
+            //stripe setting ends here
+
+            //_unitOfWork.ShoppingCart.RemoveRange(ShoppingCartVM.ListCart);
+            //_unitOfWork.Save();
+            // return RedirectToAction("Index", "Home");
+        }
+
+
 
 
 
         //[HttpPost]
         //[ValidateAntiForgeryToken]
-        //[Authorize]
-        //public IActionResult Details(ShoppingCart shoppingCart)
+        ////[/*Authorize*/]
+        //public IActionResult Details(FineModel finepay)
         //{
         //    //this claim helps to find out whether user is login or not
         //    var claimsIdentity = (ClaimsIdentity)User.Identity;
         //    var claim = claimsIdentity.FindFirst(ClaimTypes.NameIdentifier);
-        //    shoppingCart.ApplicationUserId = claim.Value;
+        //    finepay.ApplicationUserId = claim.Value;
 
         //    ShoppingCart cartFromDB = _unitOfWork.ShoppingCart.GetFirstorDefault(
         //      u => u.ApplicationUserId == claim.Value && u.ProductId == shoppingCart.ProductId);
 
-        //    if (cartFromDB == null)
-        //    {
-        //        _unitOfWork.ShoppingCart.Add(shoppingCart);
-        //    }
-        //    else
-        //    {
-        //        _unitOfWork.ShoppingCart.IncrementCount(cartFromDB, shoppingCart.Count);
-        //    }
+   
 
         //    _unitOfWork.Save();
 
