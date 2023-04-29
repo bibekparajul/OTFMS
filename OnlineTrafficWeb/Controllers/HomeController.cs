@@ -15,7 +15,6 @@ namespace OnlineTrafficWeb.Controllers
         private readonly ILogger<HomeController> _logger;
         private readonly IUnitOfWork _unitOfWork;
 
-
         public HomeController(ILogger<HomeController> logger, IUnitOfWork unitOfWork)
         {
             _logger = logger;
@@ -48,8 +47,6 @@ namespace OnlineTrafficWeb.Controllers
         public IActionResult Pay()
         {
 
-
-
             var domain = "https://localhost:7185/";
             var options = new SessionCreateOptions
             {
@@ -65,22 +62,22 @@ namespace OnlineTrafficWeb.Controllers
             };
 
 
-                var sessionLineItem = new SessionLineItemOptions
+            var sessionLineItem = new SessionLineItemOptions
+            {
+                PriceData = new SessionLineItemPriceDataOptions
                 {
-                    PriceData = new SessionLineItemPriceDataOptions
+                    UnitAmount = (long)(100),
+                    Currency = "usd",
+                    ProductData = new SessionLineItemPriceDataProductDataOptions
                     {
-                        UnitAmount = (long)(100),
-                        Currency = "usd",
-                        ProductData = new SessionLineItemPriceDataProductDataOptions
-                        {
-                            Name = "Fine",
-                        },
+                        Name = "Fine",
                     },
-                    Quantity = 1,
-                };
-                options.LineItems.Add(sessionLineItem);
+                },
+                Quantity = 1,
+            };
+            options.LineItems.Add(sessionLineItem);
 
-          //  }
+            //  }
 
             var service = new SessionService();
             Session session = service.Create(options);
