@@ -1,13 +1,20 @@
 ﻿@model LoginModel
 @{
     Layout = null;
+
 }
+
+
+@using Microsoft.AspNetCore.Identity
+
+
 <html>
     <head>
         <title>Login</title>
     </head>
     <body>
-        <h1>Please Login To Continue</h1>
+
+    <h1>Please Login To Continue</h1>
 
         <form asp-controller="Account" asp-action="Login" method="post">
             <label asp-for="Email">Email:</label>
@@ -23,5 +30,7 @@
 
 
         </form>
+
+
     </body>
 </html>

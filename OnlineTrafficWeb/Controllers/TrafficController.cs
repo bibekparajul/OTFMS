@@ -1,11 +1,12 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using OnlineTrafficWeb.Data;
 using OnlineTrafficWeb.Models;
 using System.Collections.Generic;
 
 namespace OnlineTrafficWeb.Controllers
 {
-  
+    //[Authorize(Roles="Admin")]s
     public class TrafficController : Controller
     {
         private readonly ApplicationDbContext _db;
@@ -120,7 +121,7 @@ namespace OnlineTrafficWeb.Controllers
 
             _db.TrafficAds.Remove(obj);
             _db.SaveChanges();
-            TempData["success"] = "Category Deleted Successfully";
+            TempData["success"] = "Traffic Deleted Successfully";
 
             return RedirectToAction("Index");
 

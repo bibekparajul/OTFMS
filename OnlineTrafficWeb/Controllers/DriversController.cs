@@ -6,128 +6,9 @@ using OnlineTrafficWeb.Repository.IRepository;
 
 namespace OnlineTrafficWeb.Controllers
 {
-    //[Authorize(Roles="Traffic")]
+    //[Authorize(Roles = "Traffic")]
     public class DriversController : Controller
     {
-
-
-        //crud simple 
-
-        //    private readonly ApplicationDbContext _db;
-
-        //    public DriversController(ApplicationDbContext db)
-        //    {
-        //        _db = db;
-        //    }
-
-        //    public IActionResult Index()
-        //    {
-        //        IEnumerable<DriversAdd> objDriversList = _db.DriversAds;
-        //        return View(objDriversList);
-        //    }
-
-        //    public IActionResult Create()
-        //    {
-
-        //        return View();
-        //    }
-
-        //    //POST
-        //    [HttpPost]                 //used to handle the http request
-        //    [ValidateAntiForgeryToken] //used to prevent the cross site request forgery attack
-        //    public IActionResult Create(DriversAdd obj)
-        //    {
-
-        //        //custom validation can be done as follows
-        //        if (obj.Name == obj.LicenseNumber.ToString())
-        //        {
-        //            ModelState.AddModelError("name", "Name and License cannot be same");
-        //        }
-        //        //server side validation because name cannot be empty
-
-
-        //            _db.DriversAds.Add(obj);
-        //            _db.SaveChanges();
-        //            TempData["success"] = "Traffic Added Successfully";
-        //            return View(obj);
-        //    }
-
-        //    //GET(for Edit) (Validation remains same)
-        //    public IActionResult Edit(int? id)
-        //    {
-        //        if (id == null || id == 0)
-        //        {
-        //            return NotFound();
-        //        }
-        //        var driversFromDb = _db.DriversAds.Find(id);
-        //        if (driversFromDb == null)
-        //        {
-        //            return NotFound();
-        //        }
-        //        return View(driversFromDb);
-        //    }
-
-        //    //POST
-        //    [HttpPost]                 //used to handle the http request
-        //    [ValidateAntiForgeryToken] //used to prevent the cross site request forgery attack
-        //    public IActionResult Edit(DriversAdd obj)
-        //    {
-
-        //        //custom validation can be done as follows
-        //        if (obj.Name == obj.LicenseNumber.ToString())
-        //        {
-        //            ModelState.AddModelError("name", "License cannot be same as name");
-        //        }
-        //        //server side validation because name cannot be empty
-
-
-        //            _db.DriversAds.Update(obj);
-        //            _db.SaveChanges();
-        //            TempData["success"] = "Traffic Updated Successfully";
-        //             return View(obj);
-        //    }
-
-        //    //GET(for Delete) 
-        //    public IActionResult Delete(int? id)
-        //    {
-        //        if (id == null || id == 0)
-        //        {
-        //            return NotFound();
-        //        }
-        //        var driversFromDb = _db.DriversAds.Find(id);
-        //        if (driversFromDb == null)
-        //        {
-        //            return NotFound();
-        //        }
-        //        return View(driversFromDb);
-        //    }
-
-        //    //POST
-        //    [HttpPost]                 //used to handle the http request
-        //    [ValidateAntiForgeryToken] //used to prevent the cross site request forgery attack
-        //    public IActionResult DeletePOST(int? id)
-        //    {
-
-        //        var obj = _db.DriversAds.Find(id);
-        //        if (obj == null)
-        //        {
-        //            return NotFound();
-        //        }
-
-        //        _db.DriversAds.Remove(obj);
-        //        _db.SaveChanges();
-        //        TempData["success"] = "Drivers Deleted Successfully";
-
-        //        return RedirectToAction("Index");
-
-
-        //    }
-
-        //}
-
-
-        //crud simple over
-
 
         private readonly IUnitOfWork _unitOfWork; //
 
@@ -158,7 +39,7 @@ namespace OnlineTrafficWeb.Controllers
             //custom validation can be done as follows
             if (obj.Name == obj.LicenseNumber.ToString())
             {
-                ModelState.AddModelError("name", "Display order cannot be same as name");
+                ModelState.AddModelError("name", "Name and License number cannot be same");
             }
             //server side validation because name cannot be empty
             if (ModelState.IsValid)
@@ -198,7 +79,7 @@ namespace OnlineTrafficWeb.Controllers
             //custom validation can be done as follows
             if (obj.Name == obj.LicenseNumber.ToString())
             {
-                ModelState.AddModelError("name", "Display order cannot be same as name");
+                ModelState.AddModelError("name", "Name and License number cannot be same");
             }
             //server side validation because name cannot be empty
             if (ModelState.IsValid)

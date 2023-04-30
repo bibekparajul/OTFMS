@@ -44,8 +44,27 @@ namespace OnlineTrafficWeb.Controllers
         }
 
 
+        //search here
+
+
+        public ActionResult SearchFunc(string search)
+        {
+            IEnumerable<FineModel> fineList = _unitOfWork.FineAdd.GetAll(includeProperties: "DriversAdd");
+
+            return View(fineList.Where(x=> x.LicenseNumber.Contains(search) || search == null).ToList());
+        }
+
+
+
+        //search ends here
+
+
+        //payment here
+
+
         public IActionResult Pay()
         {
+
 
             var domain = "https://localhost:7185/";
             var options = new SessionCreateOptions
@@ -86,17 +105,15 @@ namespace OnlineTrafficWeb.Controllers
             Response.Headers.Add("Location", session.Url);
             return new StatusCodeResult(303);
 
-
         } 
+
+
+        //payment done
 
         public IActionResult Success()
         {
             return View();
         }
-
-
-
-
 
 
 //[HttpPost]

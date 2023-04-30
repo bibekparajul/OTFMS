@@ -3,18 +3,21 @@
 <div class = "row pb-3">
 
     <div class="row pt-4 text-end">
-        <form asp-action="SearchFunc" method="get" >
-            <label>
-              <b> Search:</b>
-              
+                
                 @using (@Html.BeginForm("SearchFunc","Home", FormMethod.Get))
                 {
                    @Html.TextBox("search") <input type="submit" value="search" />
 
                 }
-            </label>
-        </form>
     </div>
+
+    @if(Model.Count() == 0)
+    {
+        <h5 style="color:red;">Fine Not Found!!!</h5>
+        <br />
+        <p>Please enter the valid License Number</p>
+    }
+
     @foreach (var fineee in Model)
     {
         <div class="col-lg-3 col-md-6">

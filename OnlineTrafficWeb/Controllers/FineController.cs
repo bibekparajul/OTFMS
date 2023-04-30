@@ -58,7 +58,6 @@ namespace OnlineTrafficWeb.Controllers
 
             {
 
-
                 return View(fineVM);
             }
             else
