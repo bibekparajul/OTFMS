@@ -1,0 +1,56 @@
+﻿
+
+@model LoginModel
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- Bootstrap CSS -->
+  @*<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">*@
+</head>
+<body>
+    <h1 class="text-center">Welcome To Traffic Fine System</h1>
+
+    <div>
+        <div class="row">
+            <img src="@Url.Content("~/Images/homepage.jpg")" class="card-img-top rounded" height="550px" width="300px"/>
+        </div>
+      
+@*      <img src="@Url.Content("~/Images/homepage.jpg")"  height="300px" width="250px"/>
+*@
+    </div>
+      <div class="row mt-4">
+        <div class="container">
+  <div class="row justify-content-between">
+    <div class="col-auto">
+      <button class="btn btn-primary">
+          <a asp-controller="Account" asp-action="Login"><p style="color:black">Login as Admin</p></a>
+      </button>
+    </div>
+    <div class="col-auto">
+      <button class="btn btn-primary">
+      <a asp-controller="Account" asp-action="Login"><p style="color:black">Login as Traffic</p></a>
+
+      </button>
+    </div>
+    <div class="col-auto">
+      <button class="btn btn-primary">
+     <a asp-controller="Account" asp-action="Login"><p style="color:black">Login as Driver</p></a>
+      </button>
+    </div>
+  </div>
+</div>
+        </div>
+        
+    <!-- jQuery -->
+  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+  <!-- Popper -->
+  @*<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/esm/popper-base.min.js"
+    integrity="sha384-ItzL92d1en8BfN9N9IjxVi/RZBt/BrivtynIUmOfrwBt/PdG1fCGnpvbLYo31EM9"
+    crossorigin="anonymous"></script*@
+  <!-- Bootstrap JS -->
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
+</body>
+</html>

@@ -76,18 +76,24 @@ namespace OnlineTrafficWeb.Controllers
 
                 if (res)
                 {
-                    await _signInManager.SignInAsync(u, true);
-                    return Redirect("/");
+                      await _signInManager.SignInAsync(u, true);
+                    
+                    return RedirectToAction("Index","Home");
                 }
 
             }
+
+            
+
+
+
             return View(model);
         }
 
         public async Task<IActionResult> Logout()
         {
             await _signInManager.SignOutAsync();
-            return Redirect("/");
+            return RedirectToAction("Index","Landing");
             
         }
     }

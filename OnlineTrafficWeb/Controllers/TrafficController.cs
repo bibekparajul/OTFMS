@@ -6,7 +6,7 @@ using System.Collections.Generic;
 
 namespace OnlineTrafficWeb.Controllers
 {
-    //[Authorize(Roles="Admin")]s
+    [Authorize(Roles = "Admin")]
     public class TrafficController : Controller
     {
         private readonly ApplicationDbContext _db;

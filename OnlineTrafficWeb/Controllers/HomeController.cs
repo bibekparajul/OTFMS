@@ -23,7 +23,8 @@ namespace OnlineTrafficWeb.Controllers
 
         public IActionResult Index()
         {
-
+            ViewBag.Drivers = _unitOfWork.DriversAdd.GetAll();
+            //var count = ViewBag.Drivers.Count;
             IEnumerable<FineModel> fineList = _unitOfWork.FineAdd.GetAll(includeProperties: "DriversAdd");
             return View(fineList);
         }
